@@ -6,17 +6,9 @@ Please [visit this project on Instructables](https://www.instructables.com/Tacho
 Desktop utility is [available here on GitHub](https://github.com/neiman3/obd_rtd_desktop).
 
 ## Disclaimer
- **********DISCLAIMER******
- * YOU ARE OPENING A SERIOUS CAN OF WORMS HERE...
- * messing around with your vehicle/can bus can cause damage and/or unintentional operation of your
- * vehicle! I am providing this code and instruction to you with no warranty or guarantee.
- * You assume all risk. Try this while the vehicle is PARKED FIRST! This project is actually
- * fairly safe if you simply do a little research about what you are doing. If you don't know what
- * any part of the instructions or code means, it's probably a sign that you should not be messing 
- * with your car's electrical system! Don't take this project on. Buy a premade bluetooth OBD
- * dongle and use that instead.
- * 
- * I wish you good luck...
+YOU ARE OPENING A SERIOUS CAN OF WORMS HERE...
+Messing around with your vehicle/can bus can cause damage and/or unintentional operation of your vehicle! I am providing this code and instruction to you with no warranty or guarantee. You assume all risk. Try this while the vehicle is PARKED FIRST! This project is actually fairly safe if you simply do a little research about what you are doing. If you don't know what any part of the instructions or code means, it's probably a sign that you should not be messing  with your car's electrical system! Don't take this project on. Buy a premade bluetooth OBD dongle and use that instead.
+I wish you good luck...
  * **************************
  * 
  * This uses the CAN bus interface to send requests to the ECU using OBD protocol.
