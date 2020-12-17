@@ -1,7 +1,9 @@
+
 # Alex Neiman's Real time diagnostics OBD Scan gauge tool
 
-## About
 This is the code for an Arduino-powered tachometer/scan gauge. It uses the CAN bus interface to send requests to the ECU using OBD protocol. Currently configured for TOYOTA Prius 2020.
+
+## Resources
 
 Please [visit this project on Instructables](https://www.instructables.com/TachometerScan-Gauge-Using-Arduino-OBD2-and-CAN-Bu/) for further instructions.
 
@@ -17,25 +19,21 @@ I wish you good luck...
 # Operation and Explanation
 Works like this: Arduino sends out a msg on the CAN bus with a CAN ID of `0x7DF`. That means "request". Encoded in that message is your PID that you are requesting.Look at function called requestDataOBD(). See the third byte set to var pid? That's the PID you are asking for. The ecu will then send a return message on the CAN bus with an ID of `0x7eA` with your requested PID encoded. That is what the Arduino is listening for! 
 
-Each PID corresponds to a different measurement. Look at the #define starting w/ PID to see some various different values that can be requested from the ecu. If you're getting wrong/no data, try changing the PID that you are requesting. To find PIDs for your vehicle, you can visit : (for Prius and some Subaru) (switch to appropriate tab on sheet for your subi/toy) https://docs.google.com/spreadsheets/d/1QYWdWkLg0O4tg-ANYdTwwEMhpjkYAI_5JpBfTR1JfQ0/edit?hl=en&hl=en#gid=6 and (wikipedia, general codes for most vehicles) https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_01 to find some other pid values. Keep in mind that you must adjust the draw functions for size/position so that the values fit on the screen. The defaults are RPM and engine temp.
+Each PID corresponds to a different measurement. Look at the #define starting w/ PID to see some various different values that can be requested from the ecu. If you're getting wrong/no data, try changing the PID that you are requesting. To find PIDs for your vehicle, you can visit [Excel sheet of codes for Prius and some Subaru](https://docs.google.com/spreadsheets/d/1QYWdWkLg0O4tg-ANYdTwwEMhpjkYAI_5JpBfTR1JfQ0/edit?hl=en&hl=en#gid=6) (switch to appropriate tab on sheet for your subi/toy) and [Wikipedia: general codes for most vehicles](https://en.wikipedia.org/wiki/OBD-II_PIDs#Service_01). Keep in mind that you must adjust the draw functions for size/position so that the values fit on the screen.
+| Device | Pin | Bus |
+|--|--|--|
+| MCP2515 | 13 | SCK |
+|  | 11 | MOSI |
+|  | 12 | MISO |
+|  | 10 | CS |
+| OLED | A4 | SCL |
+| |A5 | SDA|
+| Both | VCC | 3.3v / 5v
+| | GND | GND|
  
-| Pinout for Arduino Nano |
-_________
-|MCP2515| 13 | SCk
-    11 MOSI
-    12 MISO
-    10 CS
- oled-
-    A4 SCL
-    A5 SDA
- and of course vcc and gnd for each board.
+ OLED not showing up? First upload an I2c scanner sketch. Google it if you need the code. If it shows up on the scanner, make sure your i2c addres in THIS sketch has been changed to match the address of your oled. That could be the issue!
  
- OLED not showing up? First upload an I2c scanner sketch. Google it if you need the code. If it
- shows up on the scanner, make sure your i2c addres in THIS sketch has been changed to match the
- address of your oled. That could be the issue!
- 
- Hook the CAN Hi and Lo up to the CAN bus of your car. Next, hook the GND into the vehicle. 
- There are signal gnd and chassis gnd in the obd port by default. I used both of those as
+Hook the CAN Hi and Lo up to the CAN bus of your car. Next, hook the GND into the vehicle. There are signal gnd and chassis gnd in the obd port by default. I used both of those as
  ground. Next, you need to apply power to system. I used a fuse tap on the windshield wiper circuit
  since my prius has many circuits fused in a box right next to OBD port. You can use
  the Vbatt on the OBD port, but beware! That is hooked to the battery, so the device will never
